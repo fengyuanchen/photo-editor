@@ -1,0 +1,31 @@
+// Upload for importing image
+// ==================================================
+
+.upload {
+  display: table;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  > p {
+    display: table-cell;
+
+    color: #999;
+    text-align: center;
+
+    vertical-align: middle;
+  }
+}
+
+.browse {
+  margin-left: 4px;
+
+  color: $color-brand;
+
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($color-brand, 10%);
+    text-decoration: underline;
+  }
+}

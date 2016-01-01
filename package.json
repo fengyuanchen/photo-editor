@@ -1,0 +1,43 @@
+{
+  "name": "photo-editor",
+  "version": "1.0.0",
+  "description": "A photo editing application based on the Cropper.js",
+  "license": "MIT",
+  "repository": "fengyuanchen/photo-editor",
+  "author": {
+    "name": "Fengyuan Chen",
+    "url": "http://chenfengyuan.com"
+  },
+  "keywords": [
+    "photo",
+    "editor",
+    "cropper",
+    "cropperjs",
+    "cropper.js",
+    "html",
+    "css",
+    "javascript",
+    "front-end",
+    "web",
+    "development"
+  ],
+  "dependencies": {
+    "cropperjs": "^0.5.5",
+    "font-awesome": "^4.5.0",
+    "vue": "^1.0.13"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "webpack": "^1.12.9"
+  }
+}

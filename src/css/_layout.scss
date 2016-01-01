@@ -1,0 +1,65 @@
+// Layout
+// ==================================================
+
+body {
+  margin: 0;
+  color: #333;
+  font-family: "Helvetica","Arial",sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+
+  height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  background-color: #666;
+}
+
+@media (min-width: $screen-sm) {
+  .header {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.title {
+  float: left;
+  display: block;
+
+  font-size: 18px;
+  line-height: 48px;
+
+  color: $color-white;
+}
+
+.main {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: #333;
+
+  > img {
+    display: table-cell;
+    max-width: 100%;
+
+    vertical-align: middle;
+  }
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 0;
+}

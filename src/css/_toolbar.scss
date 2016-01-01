@@ -1,0 +1,41 @@
+// Toolbar for handling image
+// ==================================================
+
+.toolbar {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  z-index: 2015;
+
+  width: 256px;
+  height: 32px;
+  margin-left: -128px;
+
+  background-color: rgba($color-black, .5);
+  color: $color-white;
+}
+
+.toolbar__button {
+  float: left;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-width: 0;
+
+  font-size: 14px;
+  text-align: center;
+
+  background-color: transparent;
+  color: $color-white;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: $color-brand;
+    color: $color-white;
+  }
+}
