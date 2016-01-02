@@ -1,6 +1,6 @@
 {
   "name": "photo-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A photo editing application based on the Cropper.js",
   "license": "MIT",
   "repository": "fengyuanchen/photo-editor",
