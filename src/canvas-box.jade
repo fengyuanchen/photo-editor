@@ -1,6 +1,6 @@
 script(id="canvas-box", type="text/x-template")
   div(class="canvas", v-show="editable")
-    div(class="editor")
+    div(class="editor", @dblclick="dblclick")
       template(v-if="url")
         img(src="{{ url }}", alt="{{ name }}", @load="load")
     div(class="toolbar", @click="click", v-show="cropper")

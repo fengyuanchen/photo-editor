@@ -174,6 +174,13 @@ export default {
           break;
       }
     },
+    dblclick: function (e) {
+      if (e.target.className.indexOf('cropper-face') >= 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.crop(true);
+      }
+    },
     start: function () {
       const _this = this;
 
