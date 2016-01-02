@@ -7,6 +7,8 @@ export default {
       cropper: false,
       cropping: false,
       data: null,
+      canvasData: null,
+      cropBoxData: null,
       image: null,
       type: '',
       name: '',
@@ -194,8 +196,14 @@ export default {
         background: false,
         built: function () {
           if (_this.data) {
-            this.cropper.crop().setData(_this.data);
+            this.cropper
+              .crop()
+              .setData(_this.data)
+              .setCanvasData(_this.canvasData)
+              .setCropBoxData(_this.cropBoxData);
             _this.data = null;
+            _this.canvasData = null;
+            _this.cropBoxData = null;
           }
         },
         crop: function (data) {
@@ -220,6 +228,8 @@ export default {
       if (this.cropping) {
         this.originalUrl = this.url;
         this.data = cropper.getData();
+        this.canvasData = cropper.getCanvasData();
+        this.cropBoxData = cropper.getCropBoxData();
         this.url = cropper.getCroppedCanvas(type === 'image/png' ? null : {
           fillColor: '#fff'
         }).toDataURL(type);
