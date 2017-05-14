@@ -1,6 +1,7 @@
 # Project
 node_modules
-/_*
+npm-debug.log
+*.map
 
 # Windows image file caches
 Thumbs.db

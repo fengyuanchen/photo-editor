@@ -2,7 +2,7 @@
 
 > A photo editing application based on the [Cropper.js](https://github.com/fengyuanchen/cropperjs).
 
-- [Homepage](http://fengyuanchen.github.io/photo-editor)
+- [Website](http://fengyuanchen.github.io/photo-editor)
 
 
 
@@ -28,11 +28,12 @@
 
 ## Browser support
 
-- Chrome (latest 2)
-- Firefox (latest 2)
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Opera (latest)
+- Edge (latest)
 - Internet Explorer 9+
-- Opera (latest 2)
-- Safari (latest 2)
 
 
 
