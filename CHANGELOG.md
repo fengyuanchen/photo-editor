@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 1.1.1 (May 20, 2017)
+
+- Add namespace to vuex modules.
+
+
 ## 1.1.0 (May 14, 2017)
 
 - Upgrade to Cropper.js v1.0+ and Vue.js v2.0+.
