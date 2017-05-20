@@ -9,20 +9,17 @@ const initialState = {
 };
 
 const mutations = {
-  [types.LOADER_SET](state, data) {
+  [types.LOADER_ASSIGN](state, data) {
     Object.assign(state, data);
-  },
-  [types.LOADER_RESET](state) {
-    Object.assign(state, initialState);
   },
 };
 
 const actions = {
-  setLoader(context, data) {
-    context.commit(types.LOADER_SET, data);
+  update(context, data) {
+    context.commit(types.LOADER_ASSIGN, data);
   },
-  resetLoader(context) {
-    context.commit(types.LOADER_RESET);
+  remove(context) {
+    context.commit(types.LOADER_ASSIGN, initialState);
   },
 };
 
@@ -30,8 +27,9 @@ const getters = {
 };
 
 export default {
-  state: Object.assign({}, initialState),
-  mutations,
   actions,
   getters,
+  mutations,
+  namespaced: true,
+  state: Object.assign({}, initialState),
 };

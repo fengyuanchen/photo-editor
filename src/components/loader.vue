@@ -24,7 +24,7 @@
             const reader = new FileReader();
 
             reader.onload = () => {
-              this.$store.dispatch('setLoader', {
+              this.$store.dispatch('loader/update', {
                 loaded: true,
                 name: file.name,
                 type: file.type,

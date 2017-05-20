@@ -6,20 +6,17 @@ const initialState = {
 };
 
 const mutations = {
-  [types.EDITOR_SET](state, data) {
+  [types.EDITOR_ASSIGN](state, data) {
     Object.assign(state, data);
-  },
-  [types.EDITOR_RESET](state) {
-    Object.assign(state, initialState);
   },
 };
 
 const actions = {
-  setEditor(context, data) {
-    context.commit(types.EDITOR_SET, data);
+  update(context, data) {
+    context.commit(types.EDITOR_ASSIGN, data);
   },
-  resetEditor(context) {
-    context.commit(types.EDITOR_RESET);
+  remove(context) {
+    context.commit(types.EDITOR_ASSIGN, initialState);
   },
 };
 
@@ -27,8 +24,9 @@ const getters = {
 };
 
 export default {
-  state: Object.assign({}, initialState),
-  mutations,
   actions,
   getters,
+  mutations,
+  namespaced: true,
+  state: Object.assign({}, initialState),
 };

@@ -225,7 +225,7 @@
           },
           crop: ({ detail }) => {
             if (detail.width > 0 && detail.height > 0 && !editor.cropping) {
-              this.$store.dispatch('setEditor', {
+              this.$store.dispatch('editor/update', {
                 cropping: true,
               });
             }
@@ -237,7 +237,7 @@
         if (this.cropper) {
           this.cropper.destroy();
           this.cropper = null;
-          this.$store.dispatch('setEditor', {
+          this.$store.dispatch('editor/update', {
             cropping: false,
           });
         }
@@ -252,11 +252,11 @@
           this.canvasData = cropper.getCanvasData();
           this.cropBoxData = cropper.getCropBoxData();
           this.data = cropper.getData();
-          this.$store.dispatch('setEditor', {
+          this.$store.dispatch('editor/update', {
             cropped: true,
             cropping: false,
           });
-          this.$store.dispatch('setLoader', {
+          this.$store.dispatch('loader/update', {
             previousUrl: url,
             url: cropper.getCroppedCanvas(type === 'image/png' ? null : {
               fillColor: '#fff',
@@ -269,7 +269,7 @@
       clear() {
         if (this.editor.cropping) {
           this.cropper.clear();
-          this.$store.dispatch('setEditor', {
+          this.$store.dispatch('editor/update', {
             cropping: false,
           });
         }
@@ -277,10 +277,10 @@
 
       restore() {
         if (this.editor.cropped) {
-          this.$store.dispatch('setEditor', {
+          this.$store.dispatch('editor/update', {
             cropped: false,
           });
-          this.$store.dispatch('setLoader', {
+          this.$store.dispatch('loader/update', {
             previousUrl: '',
             url: this.loader.previousUrl,
           });
@@ -289,8 +289,8 @@
 
       reset() {
         this.stop();
-        this.$store.dispatch('resetEditor');
-        this.$store.dispatch('resetLoader');
+        this.$store.dispatch('editor/remove');
+        this.$store.dispatch('loader/remove');
       },
     },
   };
