@@ -5,8 +5,8 @@
       <navbar :data="data" @change="change"></navbar>
     </header>
     <main class="main">
-      <editor v-if="data.loaded" ref="editor" v-model="data"></editor>
-      <loader v-else ref="loader" v-model="data"></loader>
+      <editor v-if="data.loaded" ref="editor" :data="data"></editor>
+      <loader v-else ref="loader" :data="data"></loader>
     </main>
   </div>
 </template>

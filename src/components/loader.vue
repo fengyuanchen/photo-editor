@@ -12,11 +12,6 @@
   const URL = window.URL || window.webkitURL;
 
   export default {
-    model: {
-      event: 'change',
-      prop: 'data',
-    },
-
     props: {
       data: {
         type: Object,
@@ -36,12 +31,12 @@
 
           if (/^image\/\w+$/.test(file.type)) {
             if (URL) {
-              this.$emit('change', {
+              resolve({
                 loaded: true,
                 name: file.name,
                 type: file.type,
                 url: URL.createObjectURL(file),
-              }, this.data);
+              });
             } else {
               reject(new Error('Your browser is not supported.'));
             }
@@ -52,8 +47,9 @@
       },
 
       change({ target }) {
-        this.read(target.files).then(() => {
+        this.read(target.files).then((data) => {
           target.value = '';
+          this.update(data);
         }).catch((e) => {
           target.value = '';
           this.alert(e);
@@ -71,6 +67,10 @@
 
       alert(e) {
         window.alert(e && e.message ? e.message : e);
+      },
+
+      update(data) {
+        Object.assign(this.data, data);
       },
     },
   };

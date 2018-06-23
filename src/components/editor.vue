@@ -20,11 +20,6 @@
   import Cropper from 'cropperjs';
 
   export default {
-    model: {
-      event: 'change',
-      prop: 'data',
-    },
-
     props: {
       data: {
         type: Object,
@@ -203,6 +198,7 @@
           autoCrop: false,
           dragMode: 'move',
           background: false,
+
           ready: () => {
             if (this.croppedData) {
               this.cropper
@@ -216,9 +212,10 @@
               this.cropBoxData = null;
             }
           },
+
           crop: ({ detail }) => {
             if (detail.width > 0 && detail.height > 0 && !data.cropping) {
-              this.triggerChange({
+              this.update({
                 cropping: true,
               });
             }
@@ -230,9 +227,6 @@
         if (this.cropper) {
           this.cropper.destroy();
           this.cropper = null;
-          this.triggerChange({
-            cropping: false,
-          });
         }
       },
 
@@ -243,7 +237,7 @@
           this.croppedData = cropper.getData();
           this.canvasData = cropper.getCanvasData();
           this.cropBoxData = cropper.getCropBoxData();
-          this.triggerChange({
+          this.update({
             cropped: true,
             cropping: false,
             previousUrl: data.url,
@@ -258,7 +252,7 @@
       clear() {
         if (this.data.cropping) {
           this.cropper.clear();
-          this.triggerChange({
+          this.update({
             cropping: false,
           });
         }
@@ -266,8 +260,8 @@
 
       restore() {
         if (this.data.cropped) {
-          this.triggerChange({
-            cropping: false,
+          this.update({
+            cropped: false,
             previousUrl: '',
             url: this.data.previousUrl,
           });
@@ -276,7 +270,7 @@
 
       reset() {
         this.stop();
-        this.triggerChange({
+        this.update({
           cropped: false,
           cropping: false,
           loaded: false,
@@ -287,11 +281,8 @@
         });
       },
 
-      triggerChange(data) {
-        this.$emit('change', {
-          ...this.data,
-          ...data,
-        }, this.data);
+      update(data) {
+        Object.assign(this.data, data);
       },
     },
 
