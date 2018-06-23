@@ -1,6 +1,12 @@
 module.exports = {
-  plugins: [
-    require('postcss-smart-import')(),
-    require('postcss-cssnext')(),
-  ],
+  plugins: {
+    'postcss-import': {},
+    'postcss-preset-env': {
+      stage: 3,
+      features: {
+        'nesting-rules': true,
+      },
+    },
+    cssnano: {},
+  },
 };
