@@ -39,19 +39,10 @@
       },
     },
 
-    mounted() {
-      window.addEventListener('keydown', (this.onKeydown = this.keydown.bind(this)));
-    },
-
-    beforeDestroy() {
-      window.removeEventListener('keydown', this.onKeydown);
-      this.stop();
-    },
-
     methods: {
       click({ target }) {
-        const cropper = this.cropper;
-        const action = target.dataset.action || target.parentNode.dataset.action;
+        const { cropper } = this;
+        const action = target.getAttribute('data-action') || target.parentElement.getAttribute('data-action');
 
         switch (action) {
           case 'move':
@@ -106,7 +97,7 @@
           default:
         }
 
-        const cropper = this.cropper;
+        const { cropper } = this;
 
         if (!cropper) {
           return;
@@ -200,7 +191,7 @@
       },
 
       start() {
-        const editor = this.editor;
+        const { editor } = this;
 
         if (editor.cropped) {
           return;
@@ -244,7 +235,7 @@
       },
 
       crop() {
-        const cropper = this.cropper;
+        const { cropper } = this;
         const { type, url } = this.loader;
 
         if (this.editor.cropping) {
@@ -291,6 +282,15 @@
         this.$store.dispatch('editor/remove');
         this.$store.dispatch('loader/remove');
       },
+    },
+
+    mounted() {
+      window.addEventListener('keydown', (this.onKeydown = this.keydown.bind(this)));
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('keydown', this.onKeydown);
+      this.stop();
     },
   };
 </script>

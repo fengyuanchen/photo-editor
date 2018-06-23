@@ -32,7 +32,7 @@
 
     methods: {
       click({ target }) {
-        const action = target.dataset.action || target.parentNode.dataset.action;
+        const action = target.getAttribute('data-action') || target.parentElement.getAttribute('data-action');
 
         if (action) {
           this.$emit('change', action);
