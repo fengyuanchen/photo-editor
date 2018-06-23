@@ -2,14 +2,28 @@
   <div class="loader" @change="change" @dragover="dragover" @drop="drop">
     <p>Drop image here or
       <label class="browse">browse...
-        <input class="sr-only" id="file" type="file"  accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+        <input class="sr-only" id="file" type="file"  accept="image/*">
       </label>
     </p>
   </div>
 </template>
 
 <script>
+  const URL = window.URL || window.webkitURL;
+
   export default {
+    model: {
+      event: 'change',
+      prop: 'data',
+    },
+
+    props: {
+      data: {
+        type: Object,
+        default: () => ({}),
+      },
+    },
+
     methods: {
       read(files) {
         return new Promise((resolve, reject) => {
@@ -21,26 +35,16 @@
           const file = files[0];
 
           if (/^image\/\w+$/.test(file.type)) {
-            const reader = new FileReader();
-
-            reader.onload = () => {
-              this.$store.dispatch('loader/update', {
+            if (URL) {
+              this.$emit('change', {
                 loaded: true,
                 name: file.name,
                 type: file.type,
-                url: reader.result,
-              });
-
-              resolve();
-            };
-
-            reader.onabort = () => {
-              reject(new Error('Aborted to load the image with FileReader.'));
-            };
-            reader.onerror = () => {
-              reject(new Error('Failed to load the image with FileReader.'));
-            };
-            reader.readAsDataURL(file);
+                url: URL.createObjectURL(file),
+              }, this.data);
+            } else {
+              reject(new Error('Your browser is not supported.'));
+            }
           } else {
             reject(new Error('Please choose an image file.'));
           }
@@ -90,22 +94,11 @@
   .browse {
     color: #0074d9;
     cursor: pointer;
-    margin-left: 4px;
+    margin-left: .25rem;
 
     &:hover {
-      color: color(#0074d9 lightness(50%));
+      color: #08f;
       text-decoration: underline;
     }
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
   }
 </style>

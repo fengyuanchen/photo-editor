@@ -2,34 +2,50 @@
   <div class="app">
     <header class="header">
       <span class="title">Photo Editor</span>
-      <navbar @change="change"></navbar>
+      <navbar :data="data" @change="change"></navbar>
     </header>
     <main class="main">
-      <editor ref="editor" v-if="$store.state.loader.loaded"></editor>
-      <loader ref="loader" v-else></loader>
+      <editor v-if="data.loaded" ref="editor" v-model="data"></editor>
+      <loader v-else ref="loader" v-model="data"></loader>
     </main>
   </div>
 </template>
 
 <script>
   export default {
+    data() {
+      return {
+        data: {
+          cropped: false,
+          cropping: false,
+          loaded: false,
+          name: '',
+          previousUrl: '',
+          type: '',
+          url: '',
+        },
+      };
+    },
+
     methods: {
       change(action) {
+        const { editor } = this.$refs;
+
         switch (action) {
           case 'crop':
-            this.$refs.editor.crop();
+            editor.crop();
             break;
 
           case 'clear':
-            this.$refs.editor.clear();
+            editor.clear();
             break;
 
           case 'restore':
-            this.$refs.editor.restore();
+            editor.restore();
             break;
 
           case 'remove':
-            this.$refs.editor.reset();
+            editor.reset();
             break;
 
           default:
@@ -38,12 +54,6 @@
     },
   };
 </script>
-
-<style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
-</style>
 
 <style scoped>
   .app {
@@ -56,18 +66,18 @@
 
   .header {
     background-color: #666;
-    height: 48px;
+    height: 3rem;
     overflow: hidden;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
     z-index: 1;
   }
 
   @media (min-width: 768px) {
     .header {
-      padding-left: 24px;
-      padding-right: 24px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
   }
 
@@ -75,8 +85,8 @@
     color: #fff;
     display: block;
     float: left;
-    font-size: 18px;
-    line-height: 48px;
+    font-size: 1.125rem;
+    line-height: 3rem;
   }
 
   .main {
@@ -85,6 +95,6 @@
     left: 0;
     position: absolute;
     right: 0;
-    top: 48px;
+    top: 3rem;
   }
 </style>
