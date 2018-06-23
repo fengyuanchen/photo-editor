@@ -2,9 +2,7 @@
 
 > A photo editing application based on the [Cropper.js](https://github.com/fengyuanchen/cropperjs).
 
-- [Website](http://fengyuanchen.github.io/photo-editor)
-
-
+- [Website](https://fengyuanchen.github.io/photo-editor)
 
 ## Keyboard support
 
@@ -24,8 +22,6 @@
 - `H`: Flip the image on the horizontal.
 - `V`: Flip the image on the vertical.
 
-
-
 ## Browser support
 
 - Chrome (latest)
@@ -33,10 +29,8 @@
 - Safari (latest)
 - Opera (latest)
 - Edge (latest)
-- Internet Explorer 9+
-
-
+- Internet Explorer 10+
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Fengyuan Chen](http://chenfengyuan.com)
+[MIT](https://opensource.org/licenses/MIT) © [Chen Fengyuan](https://chenfengyuan.com)
