@@ -2,7 +2,7 @@
   <div class="loader" @change="change" @dragover="dragover" @drop="drop">
     <p>Drop image here or
       <label class="browse">browse...
-        <input class="sr-only" id="file" type="file"  accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" capture>
+        <input class="sr-only" id="file" type="file"  accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
       </label>
     </p>
   </div>
@@ -34,11 +34,15 @@
               resolve();
             };
 
-            reader.onerror = reject;
-            reader.onabort = reject;
+            reader.onabort = () => {
+              reject(new Error('Aborted to load the image with FileReader.'));
+            };
+            reader.onerror = () => {
+              reject(new Error('Failed to load the image with FileReader.'));
+            };
             reader.readAsDataURL(file);
           } else {
-            reject('Please choose an image file.');
+            reject(new Error('Please choose an image file.'));
           }
         });
       },
