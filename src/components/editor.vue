@@ -241,7 +241,7 @@
             cropped: true,
             cropping: false,
             previousUrl: data.url,
-            url: cropper.getCroppedCanvas(data.type === 'image/png' ? null : {
+            url: cropper.getCroppedCanvas(data.type === 'image/png' ? {} : {
               fillColor: '#fff',
             }).toDataURL(data.type),
           });
