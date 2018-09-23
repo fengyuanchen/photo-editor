@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 (Sep 23, 2018)
+
+- Fix a `TypeError` of read property from `null`.
+
 ## 1.1.2 (Jun 23, 2018)
 
 - Fix `dataset` accessing problem in IE 10 (#21).
