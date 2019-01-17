@@ -18,6 +18,19 @@
         default: () => ({}),
       },
     },
+    
+    // mounted(){ // add default image href with /?<img_href> 
+    //     const thiz = this;
+    //     if(location.search.length>1){
+    //       fetch(location.search.substring(1,location.search.length)).then(r=>r.blob()).then(b => {
+    //         const file = new File([b], 'temp', {
+    //           type: b.type,
+    //           lastModified: (new Date().getTime())
+    //         });
+    //         thiz.loadFiles([file]);
+    //       }).catch(e=>alert(e));
+    //     }
+    // },
 
     methods: {
       read(files) {
@@ -47,11 +60,15 @@
       },
 
       change({ target }) {
-        this.read(target.files).then((data) => {
-          target.value = '';
+        return this.loadFiles(target.files,()=>target.value='');
+      },
+
+      loadFiles(files,next){
+        return this.read(files).then((data) => {
+          if(next) next();
           this.update(data);
         }).catch((e) => {
-          target.value = '';
+          if(next) next();
           this.alert(e);
         });
       },
@@ -62,7 +79,7 @@
 
       drop(e) {
         e.preventDefault();
-        this.read(e.dataTransfer.files).catch(this.alert);
+        this.loadFiles(e.dataTransfer.files);
       },
 
       alert(e) {
