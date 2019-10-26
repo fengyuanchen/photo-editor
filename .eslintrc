@@ -1,10 +1,15 @@
 {
-  "extends": "airbnb-base",
+  "root": true,
+  "extends": [
+    "airbnb-base",
+    "plugin:vue/recommended"
+  ],
   "env": {
     "browser": true
   },
   "plugins": [
-    "html"
+    "html",
+    "vue"
   ],
   "rules": {
     "no-alert": "off",
