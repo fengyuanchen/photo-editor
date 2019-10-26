@@ -8,5 +8,5 @@ import './styles/index.css';
 
 new Vue({
   el: '#app',
-  render: createElement => createElement(App),
+  render: (createElement) => createElement(App),
 });

@@ -2,57 +2,68 @@
   <div class="app">
     <header class="header">
       <span class="title">Photo Editor</span>
-      <navbar :data="data" @change="change"></navbar>
+      <navbar
+        :data="data"
+        @change="change"
+      />
     </header>
     <main class="main">
-      <editor v-if="data.loaded" ref="editor" :data="data"></editor>
-      <loader v-else ref="loader" :data="data"></loader>
+      <editor
+        v-if="data.loaded"
+        ref="editor"
+        :data="data"
+      />
+      <loader
+        v-else
+        ref="loader"
+        :data="data"
+      />
     </main>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        data: {
-          cropped: false,
-          cropping: false,
-          loaded: false,
-          name: '',
-          previousUrl: '',
-          type: '',
-          url: '',
-        },
-      };
-    },
-
-    methods: {
-      change(action) {
-        const { editor } = this.$refs;
-
-        switch (action) {
-          case 'crop':
-            editor.crop();
-            break;
-
-          case 'clear':
-            editor.clear();
-            break;
-
-          case 'restore':
-            editor.restore();
-            break;
-
-          case 'remove':
-            editor.reset();
-            break;
-
-          default:
-        }
+export default {
+  data() {
+    return {
+      data: {
+        cropped: false,
+        cropping: false,
+        loaded: false,
+        name: '',
+        previousUrl: '',
+        type: '',
+        url: '',
       },
+    };
+  },
+
+  methods: {
+    change(action) {
+      const { editor } = this.$refs;
+
+      switch (action) {
+        case 'crop':
+          editor.crop();
+          break;
+
+        case 'clear':
+          editor.clear();
+          break;
+
+        case 'restore':
+          editor.restore();
+          break;
+
+        case 'remove':
+          editor.reset();
+          break;
+
+        default:
+      }
     },
-  };
+  },
+};
 </script>
 
 <style scoped>

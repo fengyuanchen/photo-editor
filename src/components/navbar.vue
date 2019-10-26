@@ -1,42 +1,93 @@
 <template>
   <div class="navbar">
-    <nav class="nav" @click="click">
-      <label class="nav__button" for="file" title="Upload" role="button" v-if="!data.loaded"><span class="fa fa-upload"></span></label>
-      <button type="button" class="nav__button" data-action="restore" title="Undo (Ctrl + Z)" v-if="data.cropped"><span class="fa fa-undo"></span></button>
-      <button type="button" class="nav__button nav__button--danger" data-action="remove" title="Delete (Delete)" v-if="data.loaded && !data.cropping"><span class="fa fa-trash"></span></button>
-      <button type="button" class="nav__button nav__button--danger" data-action="clear" title="Cancel (Esc)" v-if="data.cropping"><span class="fa fa-ban"></span></button>
-      <button type="button" class="nav__button nav__button--success" data-action="crop" title="OK (Enter)" v-if="data.cropping"><span class="fa fa-check"></span></button>
-      <a class="nav__button nav__button--success" title="Download" :download="data.name" :href="data.url" v-if="downloadable && data.loaded"><span class="fa fa-download"></span></a>
-      <a class="nav__button" href="https://github.com/fengyuanchen/photo-editor" title="View on GitHub"><span class="fa fa-github"></span></a>
+    <nav
+      class="nav"
+      @click="click"
+    >
+      <label
+        v-if="!data.loaded"
+        class="nav__button"
+        for="file"
+        title="Upload"
+        role="button"
+      ><span class="fa fa-upload" /></label>
+      <button
+        v-if="data.cropped"
+        type="button"
+        class="nav__button"
+        data-action="restore"
+        title="Undo (Ctrl + Z)"
+      >
+        <span class="fa fa-undo" />
+      </button>
+      <button
+        v-if="data.loaded && !data.cropping"
+        type="button"
+        class="nav__button nav__button--danger"
+        data-action="remove"
+        title="Delete (Delete)"
+      >
+        <span class="fa fa-trash" />
+      </button>
+      <button
+        v-if="data.cropping"
+        type="button"
+        class="nav__button nav__button--danger"
+        data-action="clear"
+        title="Cancel (Esc)"
+      >
+        <span class="fa fa-ban" />
+      </button>
+      <button
+        v-if="data.cropping"
+        type="button"
+        class="nav__button nav__button--success"
+        data-action="crop"
+        title="OK (Enter)"
+      >
+        <span class="fa fa-check" />
+      </button>
+      <a
+        v-if="downloadable && data.loaded"
+        class="nav__button nav__button--success"
+        title="Download"
+        :download="data.name"
+        :href="data.url"
+      ><span class="fa fa-download" /></a>
+      <a
+        class="nav__button"
+        href="https://github.com/fengyuanchen/photo-editor"
+        title="View on GitHub"
+      ><span class="fa fa-github" /></a>
     </nav>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        downloadable: typeof document.createElement('a').download !== 'undefined',
-      };
-    },
+export default {
 
-    props: {
-      data: {
-        type: Object,
-        default: () => ({}),
-      },
+  props: {
+    data: {
+      type: Object,
+      default: () => ({}),
     },
+  },
+  data() {
+    return {
+      downloadable: typeof document.createElement('a').download !== 'undefined',
+    };
+  },
 
-    methods: {
-      click({ target }) {
-        const action = target.getAttribute('data-action') || target.parentElement.getAttribute('data-action');
+  methods: {
+    click({ target }) {
+      const action = target.getAttribute('data-action') || target.parentElement.getAttribute('data-action');
 
-        if (action) {
-          this.$emit('change', action);
-        }
-      },
+      if (action) {
+        this.$emit('change', action);
+      }
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
