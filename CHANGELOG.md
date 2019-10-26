@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.4 (Oct 26, 2019)
+
+- Upgrade to Cropper.js v1.5.6.
+
 ## 1.1.3 (Sep 23, 2018)
 
 - Fix a `TypeError` of read property from `null`.
