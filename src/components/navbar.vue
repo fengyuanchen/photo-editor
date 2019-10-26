@@ -65,6 +65,7 @@
 
 <script>
 export default {
+  name: 'Navbar',
 
   props: {
     data: {
@@ -72,6 +73,7 @@ export default {
       default: () => ({}),
     },
   },
+
   data() {
     return {
       downloadable: typeof document.createElement('a').download !== 'undefined',
@@ -91,37 +93,37 @@ export default {
 </script>
 
 <style scoped>
-  .navbar {
-    float: right;
+.navbar {
+  float: right;
+}
+
+.nav__button {
+  background-color: transparent;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  float: left;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  width: 3rem;
+
+  &:focus {
+    outline: none;
   }
 
-  .nav__button {
-    background-color: transparent;
-    border-width: 0;
+  &:hover {
+    background-color: #0074d9;
     color: #fff;
-    cursor: pointer;
-    display: block;
-    float: left;
-    height: 3rem;
-    line-height: 3rem;
-    text-align: center;
-    width: 3rem;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      background-color: #0074d9;
-      color: #fff;
-    }
   }
+}
 
-  .nav--success:hover {
-    background-color: #2ecc40;
-  }
+.nav--success:hover {
+  background-color: #2ecc40;
+}
 
-  .nav--danger:hover {
-    background-color: #ff4136;
-  }
+.nav--danger:hover {
+  background-color: #ff4136;
+}
 </style>

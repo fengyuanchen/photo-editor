@@ -23,6 +23,8 @@
 const URL = window.URL || window.webkitURL;
 
 export default {
+  name: 'Loader',
+
   props: {
     data: {
       type: Object,
@@ -88,28 +90,28 @@ export default {
 </script>
 
 <style scoped>
-  .loader {
-    display: table;
-    height: 100%;
-    overflow: hidden;
-    width: 100%;
+.loader {
+  display: table;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
 
-    & > p {
-      color: #999;
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-    }
+  & > p {
+    color: #999;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
   }
+}
 
-  .browse {
-    color: #0074d9;
-    cursor: pointer;
-    margin-left: .25rem;
+.browse {
+  color: #0074d9;
+  cursor: pointer;
+  margin-left: .25rem;
 
-    &:hover {
-      color: #08f;
-      text-decoration: underline;
-    }
+  &:hover {
+    color: #08f;
+    text-decoration: underline;
   }
+}
 </style>

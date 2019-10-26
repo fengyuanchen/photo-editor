@@ -81,6 +81,8 @@
 import Cropper from 'cropperjs';
 
 export default {
+  name: 'Editor',
+
   props: {
     data: {
       type: Object,
@@ -359,53 +361,53 @@ export default {
 </script>
 
 <style scoped>
-  .editor {
-    height: 100%;
+.editor {
+  height: 100%;
+}
+
+.canvas {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  & > img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.toolbar {
+  background-color: rgba(0, 0, 0, .5);
+  bottom: 1rem;
+  color: #fff;
+  height: 2rem;
+  left: 50%;
+  margin-left: -8rem;
+  position: absolute;
+  width: 16rem;
+  z-index: 2015;
+}
+
+.toolbar__button {
+  background-color: transparent;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-size: .875rem;
+  height: 2rem;
+  text-align: center;
+  width: 2rem;
+
+  &:focus {
+    outline: none;
   }
 
-  .canvas {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-
-    & > img {
-      max-height: 100%;
-      max-width: 100%;
-    }
-  }
-
-  .toolbar {
-    background-color: rgba(0, 0, 0, .5);
-    bottom: 1rem;
+  &:hover {
+    background-color: #0074d9;
     color: #fff;
-    height: 2rem;
-    left: 50%;
-    margin-left: -8rem;
-    position: absolute;
-    width: 16rem;
-    z-index: 2015;
   }
-
-  .toolbar__button {
-    background-color: transparent;
-    border-width: 0;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    float: left;
-    font-size: .875rem;
-    height: 2rem;
-    text-align: center;
-    width: 2rem;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      background-color: #0074d9;
-      color: #fff;
-    }
-  }
+}
 </style>
