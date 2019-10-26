@@ -1,7 +1,7 @@
 <template>
   <div class="editor">
     <div class="canvas" @dblclick="dblclick">
-      <img ref="image" :alt="data.name" :src="data.url" @load="start">
+      <img ref="image" :alt="data.name" :src="data.url" @loadstart="start" @load="start">
     </div>
     <div class="toolbar" v-if="cropper" @click="click">
       <button class="toolbar__button" data-action="move" title="Move (M)"><span class="fa fa-arrows"></span></button>
@@ -190,7 +190,7 @@
       start() {
         const { data } = this;
 
-        if (data.cropped) {
+        if (data.cropped || this.cropper) {
           return;
         }
 
