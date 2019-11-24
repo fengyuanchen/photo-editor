@@ -75,7 +75,11 @@ export default {
 
     drop(e) {
       e.preventDefault();
-      this.read(e.dataTransfer.files).catch(this.alert);
+      this.read(e.dataTransfer.files)
+        .then(data => {
+          this.update(data);
+        })
+        .catch(this.alert);
     },
 
     alert(e) {
