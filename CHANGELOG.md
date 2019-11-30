@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.5 (Nov 30, 2019)
+
+- Fix the issue of drag and drop (#31).
+
 ## 1.1.4 (Oct 26, 2019)
 
 - Upgrade to Cropper.js v1.5.6.
