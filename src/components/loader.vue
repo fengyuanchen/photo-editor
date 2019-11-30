@@ -76,7 +76,7 @@ export default {
     drop(e) {
       e.preventDefault();
       this.read(e.dataTransfer.files)
-        .then(data => {
+        .then((data) => {
           this.update(data);
         })
         .catch(this.alert);
