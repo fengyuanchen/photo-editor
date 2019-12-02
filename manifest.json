@@ -1,0 +1,17 @@
+{
+"name":"photo editor app",
+"short_name":"photo editor",
+"theme_color":"#ffcbe4",
+"background_color":"#fa99ca",
+"display":"standalone",
+"scope":"/",
+"start_url":" http://elemefe.github.io/image-cropper/",
+"description":"edit photos that are provided",
+"orientation":"any",
+"icons":[
+{
+"src":"C:\Users\tariq\OneDrive",
+"sizes":"244x244"
+}
+]
+}
