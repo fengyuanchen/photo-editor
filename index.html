@@ -12,6 +12,13 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      if(!navigator.serviceWorker.controller){
+        navigator.serviceWorker.register("/sw.js").then(function(reg){
+          console.log("Service worker has been registered for scope:"+ reg.scope);
+        });
+      }
+    </script>
     <script src="https://fengyuanchen.github.io/shared/google-analytics.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="dist/main.js"></script></body>
 </html>
