@@ -4,10 +4,10 @@
   "version": "1.1.5",
   "main": "index.html",
   "scripts": {
-    "build": "webpack --mode production --env.production",
-    "clear": "del-cli dist index.html",
+    "build": "webpack --mode production",
+    "clean": "del-cli dist index.html",
     "lint": "eslint src *.js --ext .js,.vue --fix",
-    "release": "npm run clear && npm run lint && npm run build",
+    "release": "npm run clean && npm run lint && npm run build",
     "serve": "webpack-dev-server --mode development --host 0.0.0.0 --useLocalIp --hot --open --overlay",
     "start": "npm run serve"
   },
