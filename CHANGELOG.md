@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (Apr 26, 2021)
+
+- Support to paste image file or URL (#40).
+
 ## 1.1.5 (Nov 30, 2019)
 
 - Fix the issue of drag and drop (#31).
