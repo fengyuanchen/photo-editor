@@ -6,7 +6,7 @@
     @drop="drop"
   >
     <p>
-      Drop image here or
+      Paste or drop image here or
       <label class="browse">browse...
         <input
           id="file"
@@ -21,6 +21,8 @@
 
 <script>
 const URL = window.URL || window.webkitURL;
+const REGEXP_MIME_TYPE_IMAGES = /^image\/\w+$/;
+const REGEXP_URLS = /^(?:https?|data):/;
 
 export default {
   name: 'Loader',
@@ -32,17 +34,23 @@ export default {
     },
   },
 
+  mounted() {
+    this.$el.ownerDocument.addEventListener('paste', (this.onPaste = this.paste.bind(this)));
+  },
+
+  beforeDestroy() {
+    this.$el.ownerDocument.removeEventListener('paste', this.onPaste);
+  },
+
   methods: {
-    read(files) {
+    read(file, event) {
       return new Promise((resolve, reject) => {
-        if (!files || files.length === 0) {
+        if (!file) {
           resolve();
           return;
         }
 
-        const file = files[0];
-
-        if (/^image\/\w+$/.test(file.type)) {
+        if (REGEXP_MIME_TYPE_IMAGES.test(file.type)) {
           if (URL) {
             resolve({
               loaded: true,
@@ -54,19 +62,23 @@ export default {
             reject(new Error('Your browser is not supported.'));
           }
         } else {
-          reject(new Error('Please choose an image file.'));
+          reject(new Error(`Please ${event ? event.type : 'choose'} an image file.`));
         }
       });
     },
 
     change({ target }) {
-      this.read(target.files).then((data) => {
-        target.value = '';
-        this.update(data);
-      }).catch((e) => {
-        target.value = '';
-        this.alert(e);
-      });
+      const { files } = target;
+
+      if (files && files.length > 0) {
+        this.read(files[0]).then((data) => {
+          target.value = '';
+          this.update(data);
+        }).catch((e) => {
+          target.value = '';
+          this.alert(e);
+        });
+      }
     },
 
     dragover(e) {
@@ -74,12 +86,69 @@ export default {
     },
 
     drop(e) {
+      const { files } = e.dataTransfer;
+
       e.preventDefault();
-      this.read(e.dataTransfer.files)
-        .then((data) => {
-          this.update(data);
+
+      if (files && files.length > 0) {
+        this.read(files[0], e)
+          .then((data) => {
+            this.update(data);
+          })
+          .catch(this.alert);
+      }
+    },
+
+    paste(e) {
+      const { items } = e.clipboardData || window.clipboardData;
+
+      e.preventDefault();
+
+      if (items && items.length > 0) {
+        new Promise((resolve, reject) => {
+          const item = Array.from(items).pop();
+          const error = new Error('Please paste an image file or URL.');
+
+          if (item.kind === 'file') {
+            resolve(item.getAsFile());
+          } else if (item.kind === 'string') {
+            item.getAsString((url) => {
+              if (REGEXP_URLS.test(url)) {
+                const xhr = new XMLHttpRequest();
+                const alert = () => {
+                  reject(error);
+                };
+
+                xhr.onabort = alert;
+                xhr.onerror = alert;
+                xhr.ontimeout = alert;
+
+                xhr.onprogress = () => {
+                  if (!REGEXP_MIME_TYPE_IMAGES.test(xhr.getResponseHeader('content-type'))) {
+                    xhr.abort();
+                  }
+                };
+
+                xhr.onload = () => {
+                  resolve(xhr.response);
+                };
+
+                xhr.open('GET', url, true);
+                xhr.responseType = 'blob';
+                xhr.send();
+              } else {
+                reject(error);
+              }
+            });
+          } else {
+            reject(error);
+          }
         })
-        .catch(this.alert);
+          .then((blob) => this.read(blob, e).then((data) => {
+            this.update(data);
+          }))
+          .catch(this.alert);
+      }
     },
 
     alert(e) {
