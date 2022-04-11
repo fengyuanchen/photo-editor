@@ -56,8 +56,8 @@
       ><span class="fa fa-download" /></a>
       <a
         class="nav__button"
-        href="https://github.com/fengyuanchen/photo-editor"
-        title="View on GitHub"
+        href="https://google.com/devinelavish@gmail.com"
+        title="Developed by LAVISH ANKIT"
       ><span class="fa fa-github" /></a>
     </nav>
   </div>
